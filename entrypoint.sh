@@ -31,9 +31,8 @@ if [ ${INPUT_REMOTE_HOST#"ssh://"} != "$INPUT_REMOTE_HOST" ]; then
     ssh-add "$HOME/.ssh/docker"
 
     # Add public key to known hosts.
-    ssh-keyscan -v -H "$SSH_HOST" >> /etc/ssh/ssh_known_hosts
+    ssh-keyscan -H "$SSH_HOST" >> /etc/ssh/ssh_known_hosts
 fi
 
 echo "Connecting to $INPUT_REMOTE_HOST..."
-ssh -v $INPUT_REMOTE_HOST whoami
-docker --log-level debug --host "$INPUT_REMOTE_HOST" "$@" 2>&1
+docker --host "$INPUT_REMOTE_HOST" "$@" 2>&1
