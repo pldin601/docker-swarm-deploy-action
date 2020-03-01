@@ -8,7 +8,7 @@ Below is a brief example on how the action can be used:
 
 ```yaml
 - name: Deploy to swarm
-  uses: sagebind/docker-swarm-deploy-action@v2
+  uses: pldin601/docker-swarm-deploy-action@v2
   with:
     remote_host: ssh://user@myswarm.com
     ssh_private_key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}

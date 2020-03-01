@@ -34,5 +34,14 @@ if [ ${INPUT_REMOTE_HOST#"ssh://"} != "$INPUT_REMOTE_HOST" ]; then
     ssh-keyscan -H "$INPUT_REMOTE_HOST" >> /etc/ssh/ssh_known_hosts
 fi
 
+if [ -n "$INPUT_AWS_ACCESS_KEY_ID" ] && [ -n "$INPUT_AWS_SECRET_ACCESS_KEY" ]; then
+  echo "Setting AWS credentials..."
+  aws configure set aws_access_key_id "$INPUT_AWS_ACCESS_KEY_ID"
+  aws configure set aws_secret_access_key "$INPUT_AWS_SECRET_ACCESS_KEY"
+
+  echo "Executing aws ecr get-login..."
+  aws ecr get-login --no-include-email --region eu-central-1 | sh
+fi
+
 echo "Connecting to $INPUT_REMOTE_HOST..."
 docker --log-level debug --host "$INPUT_REMOTE_HOST" "$@" 2>&1

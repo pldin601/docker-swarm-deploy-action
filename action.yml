@@ -1,6 +1,6 @@
-name: docker-swarm-deploy
-author: Stephen M. Coakley <me@stephencoakley.com>
-description: A GitHub Action that enables you to publish your app as a Docker stack to a remote Docker swarm.
+name: docker-swarm-deploy-action
+author: Stephen M. Coakley <me@stephencoakley.com>, Roman Lakhtadyr <roman.lakhtadyr@gmal.com>
+description: A GitHub Action that enables you to publish your app as a Docker stack to a remote Docker swarm even if your stack requires ECR authentication.
 inputs:
   remote_host:
     description: Docker host to connect to
@@ -10,6 +10,12 @@ inputs:
     required: false
   ssh_private_key:
     description: SSH private key to use to connect
+    required: false
+  aws_access_key_id:
+    description: AWS access key for ECR (optional)
+    required: false
+  aws_secret_access_key:
+    description: AWS secret access key for ECR (optional)
     required: false
 runs:
   using: docker
