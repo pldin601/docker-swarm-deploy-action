@@ -31,7 +31,7 @@ if [ ${INPUT_REMOTE_HOST#"ssh://"} != "$INPUT_REMOTE_HOST" ]; then
     ssh-add "$HOME/.ssh/docker"
 
     # Add public key to known hosts.
-    ssh-keyscan -H "$INPUT_REMOTE_HOST" >> /etc/ssh/ssh_known_hosts
+    ssh-keyscan -H "$SSH_HOST" >> /etc/ssh/ssh_known_hosts
 fi
 
 if [ -n "$INPUT_AWS_ACCESS_KEY_ID" ] && [ -n "$INPUT_AWS_SECRET_ACCESS_KEY" ]; then
@@ -44,4 +44,4 @@ if [ -n "$INPUT_AWS_ACCESS_KEY_ID" ] && [ -n "$INPUT_AWS_SECRET_ACCESS_KEY" ]; t
 fi
 
 echo "Connecting to $INPUT_REMOTE_HOST..."
-docker --log-level debug --host "$INPUT_REMOTE_HOST" "$@" 2>&1
+docker --host "$INPUT_REMOTE_HOST" "$@" 2>&1
