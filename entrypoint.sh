@@ -43,5 +43,10 @@ if [ -n "$INPUT_AWS_ACCESS_KEY_ID" ] && [ -n "$INPUT_AWS_SECRET_ACCESS_KEY" ]; t
   aws ecr get-login --no-include-email --region eu-central-1 | sh
 fi
 
+if [ -n "$DOCKER_USERNAME" ] && [ -n "$DOCKER_PASSWORD" ] && [ -n "$DOCKER_REGISTRY" ]; then
+  echo "Logging in to the registry..."
+  docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" "$DOCKER_REGISTRY"
+fi
+
 echo "Connecting to $INPUT_REMOTE_HOST..."
 docker --host "$INPUT_REMOTE_HOST" "$@" 2>&1
