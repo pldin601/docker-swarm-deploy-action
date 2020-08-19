@@ -17,6 +17,15 @@ inputs:
   aws_secret_access_key:
     description: AWS secret access key for ECR (optional)
     required: false
+  docker_username:
+    description: Username for docker authentication
+    required: false
+  docker_password:
+    description: Password for docker authentication
+    required: false
+  docker_registry:
+    description: Docker registry to authenticate
+    required: false
 runs:
   using: docker
   image: Dockerfile
